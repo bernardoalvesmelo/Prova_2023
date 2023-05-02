@@ -44,7 +44,6 @@ namespace Prova.ModuloConta
         public double ObterFaturamentoDia(DateTime data)
         {
             double soma = 0;
-            string dataString = DateTime.Now.ToString("dd/MM/yyyy");
             DateTime hoje = data;
             foreach (Conta conta in ListaFechada)
             {
