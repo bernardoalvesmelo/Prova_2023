@@ -77,7 +77,6 @@ namespace Prova.ModuloMesa
             while (!entidadeValida)
             {
                 Mesa mesa = (Mesa)entidade;
-                Console.Write("Digite o nome do garçom: ");
                 int numero = ValidarInt("Digite o número da mesa: ");
                 mesa.Numero = numero;
                 Console.Write("Digite o tipo da mesa: ");

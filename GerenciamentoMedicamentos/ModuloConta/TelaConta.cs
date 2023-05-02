@@ -88,6 +88,10 @@ namespace Prova.ModuloConta
                             Console.ReadLine();
                             return;
                         }
+                        AtualizarPedido();
+                        Console.ReadLine();
+                        break;
+                    case "7":
                         VerFaturamento();
                         Console.ReadLine();
                         Console.Clear();
@@ -107,7 +111,7 @@ namespace Prova.ModuloConta
             while (!entidadeValida)
             {
                 Conta conta = (Conta)ValidarId();
-                conta.DataFechamento = ValidarData("Digite a data de fechamento");
+                conta.DataFechamento = ValidarData("Digite a data de fechamento: ");
                 repositorioConta.FecharConta(conta);
                 entidadeValida = ValidarEntidade(conta);
             }
@@ -133,7 +137,7 @@ namespace Prova.ModuloConta
             while (!entidadeValida)
             {
                 Conta conta = (Conta)ValidarId();
-                if (conta.PedidosLista.Count < 0)
+                if (conta.PedidosLista.Count <= 0)
                 {
                     Console.WriteLine("A conta escolhida não possui pedidos!");
                     return;
@@ -148,7 +152,7 @@ namespace Prova.ModuloConta
         public virtual void AtualizarPedido()
         {
             Conta conta = (Conta)ValidarId();
-            if (conta.PedidosLista.Count < 0)
+            if (conta.PedidosLista.Count <= 0)
             {
                 Console.WriteLine("A conta escolhida não possui pedidos!");
                 return;
@@ -162,16 +166,16 @@ namespace Prova.ModuloConta
 
         public void VerFaturamento()
         {
-            DateTime data = ValidarData("Digite o dia: ");
+            DateTime data = ValidarData("Digite a data: ");
             double faturamento = repositorioConta.ObterFaturamentoDia(data);
-            Console.WriteLine($"Faturamento de {data.ToString("dd/yy/MMMM")}: R${Math.Round(faturamento, 2)}");
+            Console.WriteLine($"Faturamento de {data.ToString("dd/MM/yyyy")}: R${Math.Round(faturamento, 2)}");
         }
 
         public override EntidadeBase RegistrarEntidade()
         {
-            Pedido veiculo = new Pedido();
-            PreencherAtributos(veiculo);
-            return veiculo;
+            Conta conta = new Conta();
+            PreencherAtributos(conta);
+            return conta;
         }
 
         public override void PreencherAtributos(EntidadeBase entidade)
@@ -201,7 +205,7 @@ namespace Prova.ModuloConta
                 Console.Write("Digite o nome do produto: ");
                 string nome = Console.ReadLine();
                 pedido.Nome = nome;
-                int quantidade = ValidarInt("Digite a quantidade do produto");
+                int quantidade = ValidarInt("Digite a quantidade do produto: ");
                 pedido.Quantidade = quantidade;
                 double valorUnidade = ValidarDouble("Digite o valor da unidade: ");
                 pedido.ValorUnidade = valorUnidade;
@@ -219,7 +223,7 @@ namespace Prova.ModuloConta
                 Console.Write("Digite o nome do produto: ");
                 string nome = Console.ReadLine();
                 pedido.Nome = nome;
-                int quantidade = ValidarInt("Digite a quantidade do produto");
+                int quantidade = ValidarInt("Digite a quantidade do produto: ");
                 pedido.Quantidade = quantidade;
                 double valorUnidade = ValidarDouble("Digite o valor da unidade: ");
                 pedido.ValorUnidade = valorUnidade;
@@ -270,7 +274,7 @@ namespace Prova.ModuloConta
             }
         }
 
-        protected virtual string[] ObterOpcoes()
+        protected override string[] ObterOpcoes()
         {
             string[] opcoes =
             {
@@ -281,7 +285,8 @@ namespace Prova.ModuloConta
             $"3-Fechar {this.nomeEntidade}",
             $"4-Inserir Pedido",
             $"5-Remover Pedido",
-            $"6-Ver Faturamento",
+            $"6-Editar Pedido",
+            $"7-Ver Faturamento",
             };
             return opcoes;
         }

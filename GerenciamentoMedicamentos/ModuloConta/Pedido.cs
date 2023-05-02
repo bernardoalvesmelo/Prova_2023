@@ -50,9 +50,9 @@ namespace Prova.ModuloConta
                 erros.Add("O campo tipo é obrigatório");
             }
 
-            if (Quantidade > 0)
+            if (Quantidade <= 0)
             {
-                erros.Add("O campo quantidade não pode ser negativo");
+                erros.Add("O campo quantidade não pode ser menor que zero");
             }
 
             if (ValorUnidade < 0)

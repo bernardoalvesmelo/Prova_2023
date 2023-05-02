@@ -44,7 +44,7 @@ namespace Prova.ModuloConta
         {
             string[] atributos = { (Id + ""), Tipo, ContaGarcom.Nome, ("Mesa: " + ContaMesa.Numero), 
                 "R$: " + (Math.Round(TotalConta, 2) + ""), 
-                DataFechamento.Year == 1 ? "Em Aberto": DataFechamento.ToString("dd/mm/yyyy")};
+                DataFechamento.Year == 1 ? "Em Aberto": DataFechamento.ToString("dd/MM/yyyy")};
             return atributos;
         }
 

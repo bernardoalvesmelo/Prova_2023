@@ -44,12 +44,12 @@ namespace Prova.ModuloConta
         public double ObterFaturamentoDia(DateTime data)
         {
             double soma = 0;
+            string dataString = DateTime.Now.ToString("dd/MM/yyyy");
+            DateTime hoje = data;
             foreach (Conta conta in ListaFechada)
             {
-                if  (
-                    DateTime.Now.Month == conta.DataFechamento.Month
-                    && DateTime.Now.Year == conta.DataFechamento.Year
-                    && DateTime.Now.Day == conta.DataFechamento.Day
+                if (
+                    hoje == conta.DataFechamento
                 )
                 {
                     soma += conta.TotalConta;
