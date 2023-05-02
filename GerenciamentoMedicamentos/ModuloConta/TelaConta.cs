@@ -18,7 +18,7 @@ namespace Prova.ModuloConta
             repositorioConta = repositorio;
             titulo = "Contas";
             nomeEntidade = "Conta";
-            string[] cabecalho = { "Id:", "Tipo:", "Garçom", "Número", "Total Conta R$: " };
+            string[] cabecalho = { "Id:", "Tipo:", "Garçom", "Número", "Total Conta R$: ", "Data Fechamento:"};
             Cabecalho = cabecalho;
             this.telaGarcom = telaGarcom;
             this.telaMesa = telaMesa;
@@ -82,16 +82,6 @@ namespace Prova.ModuloConta
                         Console.ReadLine();
                         break;
                     case "6":
-                        if (repositorioConta.Lista.Count <= 0)
-                        {
-                            Console.WriteLine("Não existe contas registradas no sistema!");
-                            Console.ReadLine();
-                            return;
-                        }
-                        AtualizarPedido();
-                        Console.ReadLine();
-                        break;
-                    case "7":
                         VerFaturamento();
                         Console.ReadLine();
                         Console.Clear();
@@ -108,13 +98,13 @@ namespace Prova.ModuloConta
         {
 
             bool entidadeValida = false;
+            Conta conta = (Conta)ValidarId();
             while (!entidadeValida)
             {
-                Conta conta = (Conta)ValidarId();
                 conta.DataFechamento = ValidarData("Digite a data de fechamento: ");
-                repositorioConta.FecharConta(conta);
                 entidadeValida = ValidarEntidade(conta);
             }
+            repositorioConta.FecharConta(conta);
         }
 
         private void InserirPedido()
@@ -285,8 +275,7 @@ namespace Prova.ModuloConta
             $"3-Fechar {this.nomeEntidade}",
             $"4-Inserir Pedido",
             $"5-Remover Pedido",
-            $"6-Editar Pedido",
-            $"7-Ver Faturamento",
+            $"6-Ver Faturamento",
             };
             return opcoes;
         }
