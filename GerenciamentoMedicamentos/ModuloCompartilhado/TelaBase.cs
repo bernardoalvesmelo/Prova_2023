@@ -117,7 +117,7 @@ namespace Prova.ModuloCompartilhado
                 {
                     return numero;
                 }
-                Console.WriteLine("Digite apenas um número inteiro!");
+                Console.WriteLine("Digite um número!");
                 Console.ReadLine();
             }
         }

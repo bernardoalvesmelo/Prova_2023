@@ -1,6 +1,7 @@
 using Prova.ModuloConta;
 using Prova.ModuloMesa;
 using Prova.ModuloGarcom;
+using Prova.ModuloProduto;
 
 namespace Prova
 {
@@ -14,7 +15,12 @@ namespace Prova
             RepositorioMesa repositorioMesa = new RepositorioMesa();
             TelaMesa telaMesa = new TelaMesa(repositorioMesa);
             RepositorioConta repositorioConta = new RepositorioConta();
-            TelaConta telaConta = new TelaConta(repositorioConta, telaGarcom, telaMesa);
+            RepositorioProduto repositorioProduto = new RepositorioProduto();
+            TelaProduto telaProduto = new TelaProduto(repositorioProduto);
+            TelaConta telaConta = new TelaConta(repositorioConta,
+                telaGarcom,
+                telaMesa,
+                telaProduto);
             bool continuar = true;
             while (continuar)
             {
@@ -32,6 +38,9 @@ namespace Prova
                         telaMesa.Opcoes();
                         break;
                     case "3":
+                        telaProduto.Opcoes();
+                        break;
+                    case "4":
                         telaConta.Opcoes();
                         break;
                     default:
@@ -50,7 +59,8 @@ namespace Prova
             "0-Sair",
             "1-Cadastrar Garçom",
             "2-Cadastrar Mesa",
-            "3-Cadastrar Conta",
+            "3-Cadastrar Produto",
+            "4-Cadastrar Conta",
         };
             Console.Clear();
             foreach (string opcao in menu)

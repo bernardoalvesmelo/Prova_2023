@@ -4,6 +4,7 @@ using System.Collections;
 using Prova.ModuloCompartilhado;
 using Prova.ModuloGarcom;
 using Prova.ModuloMesa;
+using Prova.ModuloProduto;
 
 namespace Prova.ModuloConta
 {
@@ -11,17 +12,22 @@ namespace Prova.ModuloConta
     {
         private TelaGarcom telaGarcom;
         private TelaMesa telaMesa;
+        private TelaProduto telaProduto;
         private RepositorioConta repositorioConta;
 
-        public TelaConta(RepositorioConta repositorio, TelaGarcom telaGarcom, TelaMesa telaMesa) : base(repositorio)
+        public TelaConta(RepositorioConta repositorio, 
+            TelaGarcom telaGarcom,
+            TelaMesa telaMesa,
+            TelaProduto telaProduto) : base(repositorio)
         {
             repositorioConta = repositorio;
             titulo = "Contas";
             nomeEntidade = "Conta";
-            string[] cabecalho = { "Id:", "Tipo:", "Garçom", "Número", "Total Conta R$: ", "Data Fechamento:"};
+            string[] cabecalho = { "Id:", "Tipo:", "Garçom", "Número", "Total Conta R$: ", "Data Fechamento:" };
             Cabecalho = cabecalho;
             this.telaGarcom = telaGarcom;
             this.telaMesa = telaMesa;
+            this.telaProduto = telaProduto;
         }
 
         public void Opcoes()
@@ -38,6 +44,12 @@ namespace Prova.ModuloConta
                         if (telaGarcom.Quantidade <= 0)
                         {
                             Console.WriteLine("Não existe garçons registrados no sistema!");
+                            Console.ReadLine();
+                            return;
+                        }
+                        if (telaMesa.Quantidade <= 0)
+                        {
+                            Console.WriteLine("Não existe mesas registradas no sistema!");
                             Console.ReadLine();
                             return;
                         }
@@ -64,6 +76,12 @@ namespace Prova.ModuloConta
                         if (repositorioConta.Lista.Count <= 0)
                         {
                             Console.WriteLine("Não existe contas registradas no sistema!");
+                            Console.ReadLine();
+                            return;
+                        }
+                        if(telaProduto.Quantidade <= 0)
+                        {
+                            Console.WriteLine("Não existe produtos registrados no sistema!");
                             Console.ReadLine();
                             return;
                         }
@@ -139,20 +157,7 @@ namespace Prova.ModuloConta
             }
         }
 
-        public virtual void AtualizarPedido()
-        {
-            Conta conta = (Conta)ValidarId();
-            if (conta.PedidosLista.Count <= 0)
-            {
-                Console.WriteLine("A conta escolhida não possui pedidos!");
-                return;
-            }
-            Pedido pedido = (Pedido)ValidarIdPedido(conta.PedidosLista);
-            int id = pedido.Id;
-            Pedido pedidoAtualizado = pedido.ObterNovaInstancia();
-            pedidoAtualizado = EditarAtributosPedido(pedidoAtualizado);
-            repositorioConta.EditarPedido(pedido, pedidoAtualizado);
-        }
+        
 
         public void VerFaturamento()
         {
@@ -192,31 +197,11 @@ namespace Prova.ModuloConta
             Pedido pedido = new Pedido();
             while (!entidadeValida)
             {
-                Console.Write("Digite o nome do produto: ");
-                string nome = Console.ReadLine();
-                pedido.Nome = nome;
+                Produto produto = (Produto)telaProduto.ValidarId();
+                pedido.Nome = produto.Nome;
                 int quantidade = ValidarInt("Digite a quantidade do produto: ");
                 pedido.Quantidade = quantidade;
-                double valorUnidade = ValidarDouble("Digite o valor da unidade: ");
-                pedido.ValorUnidade = valorUnidade;
-                pedido.ValorTotal = pedido.ValorUnidade * pedido.Quantidade;
-                entidadeValida = ValidarEntidade(pedido);
-            }
-            return pedido;
-        }
-
-        public Pedido EditarAtributosPedido(Pedido pedido)
-        {
-            bool entidadeValida = false;
-            while (!entidadeValida)
-            {
-                Console.Write("Digite o nome do produto: ");
-                string nome = Console.ReadLine();
-                pedido.Nome = nome;
-                int quantidade = ValidarInt("Digite a quantidade do produto: ");
-                pedido.Quantidade = quantidade;
-                double valorUnidade = ValidarDouble("Digite o valor da unidade: ");
-                pedido.ValorUnidade = valorUnidade;
+                pedido.ValorUnidade = produto.ValorUnidade;
                 pedido.ValorTotal = pedido.ValorUnidade * pedido.Quantidade;
                 entidadeValida = ValidarEntidade(pedido);
             }

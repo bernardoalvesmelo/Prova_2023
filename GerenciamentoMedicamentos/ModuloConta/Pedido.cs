@@ -1,4 +1,5 @@
 using System.Collections;
+using Prova.ModuloProduto;
 using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloConta
@@ -7,6 +8,7 @@ namespace Prova.ModuloConta
     {
         static private int id = 0;
 
+        public Produto PedidoProduto { get; set; }
         public string Nome { get; set; }
 
         public double ValorUnidade { get; set; }
@@ -35,6 +37,7 @@ namespace Prova.ModuloConta
         public override void Atualizar(EntidadeBase entidade)
         {
             Pedido pedido = (Pedido)entidade;
+            PedidoProduto = pedido.PedidoProduto;
             Nome = pedido.Nome;
             Quantidade = pedido.Quantidade;
             ValorUnidade = pedido.ValorUnidade;
