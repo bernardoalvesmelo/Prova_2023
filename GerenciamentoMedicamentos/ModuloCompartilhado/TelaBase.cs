@@ -2,9 +2,9 @@ using System.Globalization;
 
 namespace Prova.ModuloCompartilhado
 {
-    public abstract class TelaBase
+    public abstract class TelaBase<T> where T : EntidadeBase
     {
-        protected RepositorioBase repositorio;
+        protected RepositorioBase<T> repositorio;
         protected string titulo;
         protected string nomeEntidade;
 
@@ -14,7 +14,7 @@ namespace Prova.ModuloCompartilhado
         }
         public string[] Cabecalho { get; protected set; }
 
-        public TelaBase(RepositorioBase repositorio)
+        public TelaBase(RepositorioBase<T> repositorio)
         {
             this.repositorio = repositorio;
             titulo = "Entidades";
@@ -36,7 +36,7 @@ namespace Prova.ModuloCompartilhado
             Console.Write(cabecalho);
             Console.WriteLine();
             Console.WriteLine("".PadRight(cabecalho.Length, '-'));
-            foreach (EntidadeBase entidade in repositorio.Lista)
+            foreach (T entidade in repositorio.Lista)
             {
                 foreach (string atributo in entidade.ObterAtributos())
                 {
@@ -48,24 +48,24 @@ namespace Prova.ModuloCompartilhado
 
         public virtual void AtualizarEntidade()
         {
-            EntidadeBase entidadeAtualizada = ValidarId();
+            T entidadeAtualizada = ValidarId();
             int id = entidadeAtualizada.Id;
-            entidadeAtualizada = entidadeAtualizada.ObterNovaInstancia();
+            entidadeAtualizada = (T)entidadeAtualizada.ObterNovaInstancia();
             PreencherAtributos(entidadeAtualizada);
             repositorio.EditarRegistro(entidadeAtualizada, id);
         }
 
-        public abstract void PreencherAtributos(EntidadeBase entidade);
+        public abstract void PreencherAtributos(T entidade);
 
         public virtual void RemoverEntidade()
         {
-            EntidadeBase entidade = ValidarId();
+            T entidade = ValidarId();
             repositorio.RemoverRegistro(entidade);
         }
 
-        public virtual EntidadeBase ValidarId()
+        public virtual T ValidarId()
         {
-            EntidadeBase entidade;
+            T entidade;
             while (true)
             {
                 MostrarEntidades();
@@ -143,12 +143,12 @@ namespace Prova.ModuloCompartilhado
                 }
                 else
                 {
-                    Console.WriteLine("Digite a data no formato dd/mm/yyyy!");
+                    Console.WriteLine("Digite a data no formato dd/MM/yyyy!");
                     Console.ReadLine();
                 }
             }
         }
-        protected bool ValidarEntidade(EntidadeBase entidade)
+        protected bool ValidarEntidade(T entidade)
         {
             if (entidade.ObterErros().Count > 0)
             {

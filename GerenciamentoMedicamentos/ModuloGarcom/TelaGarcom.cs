@@ -3,11 +3,11 @@ using Prova.ModuloCompartilhado;
 namespace Prova.ModuloGarcom
 {
 
-    public class TelaGarcom : TelaBase
+    public class TelaGarcom : TelaBase<Garcom>
     {
 
 
-        public TelaGarcom(RepositorioBase repositorio) : base(repositorio)
+        public TelaGarcom(RepositorioGarcom repositorio) : base(repositorio)
         {
             titulo = "Garçons";
             nomeEntidade = "Garçom";
@@ -64,19 +64,18 @@ namespace Prova.ModuloGarcom
             }
         }
 
-        public override EntidadeBase RegistrarEntidade()
+        public override Garcom RegistrarEntidade()
         {
             Garcom garcom = new Garcom();
             PreencherAtributos(garcom);
             return garcom;
         }
 
-        public override void PreencherAtributos(EntidadeBase entidade)
+        public override void PreencherAtributos(Garcom garcom)
         {
             bool entidadeValida = false;
             while (!entidadeValida)
             {
-                Garcom garcom = (Garcom)entidade;
                 Console.Write("Digite o nome do garçom: ");
                 string nome = Console.ReadLine();
                 garcom.Nome = nome;

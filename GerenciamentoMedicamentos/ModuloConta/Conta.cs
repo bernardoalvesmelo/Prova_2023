@@ -15,7 +15,7 @@ namespace Prova.ModuloConta
 
         public Mesa ContaMesa { get; set; }
 
-        public ArrayList PedidosLista { get; set; }
+        public List<Pedido> PedidosLista { get; set; }
 
         public DateTime DataFechamento { get; set; }
 

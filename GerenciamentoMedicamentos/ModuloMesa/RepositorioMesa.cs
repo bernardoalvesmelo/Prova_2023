@@ -2,7 +2,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloMesa
 {
-    public class RepositorioMesa : RepositorioBase
+    public class RepositorioMesa : RepositorioBase<Mesa>
     {
         public RepositorioMesa()
         {
@@ -11,7 +11,7 @@ namespace Prova.ModuloMesa
 
         public override Mesa EncontrarRegistro(int id)
         {
-            return (Mesa)base.EncontrarRegistro(id);
+            return base.EncontrarRegistro(id);
         }
     }
 }

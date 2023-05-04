@@ -3,11 +3,11 @@ using Prova.ModuloCompartilhado;
 namespace Prova.ModuloMesa
 {
 
-    public class TelaMesa : TelaBase
+    public class TelaMesa : TelaBase<Mesa>
     {
 
 
-        public TelaMesa(RepositorioBase repositorio) : base(repositorio)
+        public TelaMesa(RepositorioMesa repositorio) : base(repositorio)
         {
             titulo = "Mesas";
             nomeEntidade = "Mesa";
@@ -64,19 +64,18 @@ namespace Prova.ModuloMesa
             }
         }
 
-        public override EntidadeBase RegistrarEntidade()
+        public override Mesa RegistrarEntidade()
         {
             Mesa mesa = new Mesa();
             PreencherAtributos(mesa);
             return mesa;
         }
 
-        public override void PreencherAtributos(EntidadeBase entidade)
+        public override void PreencherAtributos(Mesa mesa)
         {
             bool entidadeValida = false;
             while (!entidadeValida)
             {
-                Mesa mesa = (Mesa)entidade;
                 int numero = ValidarInt("Digite o número da mesa: ");
                 mesa.Numero = numero;
                 Console.Write("Digite o tipo da mesa: ");

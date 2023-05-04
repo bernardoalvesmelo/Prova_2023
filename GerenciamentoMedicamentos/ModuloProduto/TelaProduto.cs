@@ -4,11 +4,11 @@ using Prova.ModuloConta;
 namespace Prova.ModuloProduto
 {
 
-    public class TelaProduto : TelaBase
+    public class TelaProduto : TelaBase<Produto>
     {
 
 
-        public TelaProduto(RepositorioBase repositorio) : base(repositorio)
+        public TelaProduto(RepositorioProduto repositorio) : base(repositorio)
         {
             titulo = "Produtos";
             nomeEntidade = "Produto";
@@ -65,19 +65,18 @@ namespace Prova.ModuloProduto
             }
         }
 
-        public override EntidadeBase RegistrarEntidade()
+        public override Produto RegistrarEntidade()
         {
             Produto produto = new Produto();
             PreencherAtributos(produto);
             return produto;
         }
 
-        public override void PreencherAtributos(EntidadeBase entidade)
+        public override void PreencherAtributos(Produto produto)
         {
             bool entidadeValida = false;
             while (!entidadeValida)
             {
-                Produto produto = (Produto)entidade;
                 Console.Write("Digite o nome do produto: ");
                 string nome = Console.ReadLine();
                 produto.Nome = nome;

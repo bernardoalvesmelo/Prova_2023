@@ -4,18 +4,18 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloConta
 {
-    public class RepositorioConta : RepositorioBase
+    public class RepositorioConta : RepositorioBase<Conta>
     {
-        public ArrayList ListaFechada { get; set; }
+        public List<Conta> ListaFechada { get; set; }
 
         public RepositorioConta()
         {
-            this.ListaFechada = new ArrayList();
+            this.ListaFechada = new List<Conta>();
         }
 
         public override Conta EncontrarRegistro(int id)
         {
-            return (Conta)base.EncontrarRegistro(id);
+            return base.EncontrarRegistro(id);
         }
 
         public void FecharConta(Conta conta)
@@ -41,20 +41,20 @@ namespace Prova.ModuloConta
             pedido.Atualizar(pedidoAtualizado);
         }
 
-        public double ObterFaturamentoDia(DateTime data)
+        public List<Conta> ObterFaturamentoDia(DateTime data)
         {
-            double soma = 0;
-            DateTime hoje = data;
+
+            List<Conta> listaFaturamento = new List<Conta>();
             foreach (Conta conta in ListaFechada)
             {
                 if (
-                    hoje == conta.DataFechamento
+                    data == conta.DataFechamento
                 )
                 {
-                    soma += conta.TotalConta;
+                    listaFaturamento.Add(conta);
                 }
             }
-            return soma;
+            return listaFaturamento;
         }
     }
 }

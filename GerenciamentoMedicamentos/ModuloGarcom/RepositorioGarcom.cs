@@ -2,7 +2,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloGarcom
 {
-    public class RepositorioGarcom : RepositorioBase
+    public class RepositorioGarcom : RepositorioBase<Garcom>
     {
         public RepositorioGarcom()
         {
@@ -11,7 +11,7 @@ namespace Prova.ModuloGarcom
 
         public override Garcom EncontrarRegistro(int id)
         {
-            return (Garcom)base.EncontrarRegistro(id);
+            return base.EncontrarRegistro(id);
         }
     }
 }

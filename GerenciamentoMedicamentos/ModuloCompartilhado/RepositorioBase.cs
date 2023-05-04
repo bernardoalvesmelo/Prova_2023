@@ -1,31 +1,33 @@
 namespace Prova.ModuloCompartilhado
 {
     using System.Collections;
+    using System.Collections.Generic;
 
-    public abstract class RepositorioBase
+    public abstract class RepositorioBase<T> where T : EntidadeBase
     {
-        public ArrayList Lista { get; protected set; }
+        public List<T> Lista { get; protected set; }
 
         public RepositorioBase()
         {
-            this.Lista = new ArrayList();
+            this.Lista = new List<T>();
         }
 
-        public virtual void InserirRegistro(EntidadeBase entidade)
+        public virtual void InserirRegistro(T entidade)
         {
             Lista.Add(entidade);
         }
 
         public virtual void EditarRegistro (
-            EntidadeBase entidadeAtualizada, int id
+            T entidadeAtualizada, int id
         )
         {
             EncontrarRegistro(id).Atualizar(entidadeAtualizada);
         }
 
-        public virtual EntidadeBase EncontrarRegistro(int id, ArrayList lista)
+        public virtual TRegistro EncontrarRegistro<TRegistro>(int id, List<TRegistro> lista)
+            where TRegistro : EntidadeBase
         {
-            foreach (EntidadeBase entidade in lista)
+            foreach (TRegistro entidade in lista)
             {
                 if (entidade.Id == id)
                 {
@@ -36,9 +38,9 @@ namespace Prova.ModuloCompartilhado
             return null;
         }
 
-        public virtual EntidadeBase EncontrarRegistro(int id)
+        public virtual T EncontrarRegistro(int id)
         {
-            foreach (EntidadeBase entidade in Lista)
+            foreach (T entidade in Lista)
             {
                 if (entidade.Id == id)
                 {
@@ -49,7 +51,7 @@ namespace Prova.ModuloCompartilhado
             return null;
         }
 
-        public virtual void RemoverRegistro(EntidadeBase entidade)
+        public virtual void RemoverRegistro(T entidade)
         {
             Lista.Remove(entidade);
         }

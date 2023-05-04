@@ -50,7 +50,7 @@ namespace Prova.ModuloConta
 
             if (string.IsNullOrEmpty(Nome.Trim()))
             {
-                erros.Add("O campo tipo é obrigatório");
+                erros.Add("O campo nome é obrigatório");
             }
 
             if (Quantidade <= 0)

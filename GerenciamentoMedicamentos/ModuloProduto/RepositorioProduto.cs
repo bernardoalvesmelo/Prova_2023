@@ -2,7 +2,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloProduto
 {
-    public class RepositorioProduto : RepositorioBase
+    public class RepositorioProduto : RepositorioBase<Produto>
     {
         public RepositorioProduto()
         {
@@ -11,7 +11,7 @@ namespace Prova.ModuloProduto
 
         public override Produto EncontrarRegistro(int id)
         {
-            return (Produto)base.EncontrarRegistro(id);
+            return base.EncontrarRegistro(id);
         }
     }
 }

@@ -8,7 +8,7 @@ using Prova.ModuloProduto;
 
 namespace Prova.ModuloConta
 {
-    public class TelaConta : TelaBase
+    public class TelaConta : TelaBase<Conta>
     {
         private TelaGarcom telaGarcom;
         private TelaMesa telaMesa;
@@ -116,7 +116,7 @@ namespace Prova.ModuloConta
         {
 
             bool entidadeValida = false;
-            Conta conta = (Conta)ValidarId();
+            Conta conta = ValidarId();
             while (!entidadeValida)
             {
                 conta.DataFechamento = ValidarData("Digite a data de fechamento: ");
@@ -132,7 +132,7 @@ namespace Prova.ModuloConta
             Pedido pedido = PreencherAtributosPedido();
             while (!entidadeValida)
             {
-                Conta conta = (Conta)ValidarId();
+                Conta conta = ValidarId();
                 repositorioConta.InserirContaPedido(conta, pedido);
                 entidadeValida = ValidarEntidade(conta);
             }
@@ -144,13 +144,13 @@ namespace Prova.ModuloConta
             bool entidadeValida = false;
             while (!entidadeValida)
             {
-                Conta conta = (Conta)ValidarId();
+                Conta conta = ValidarId();
                 if (conta.PedidosLista.Count <= 0)
                 {
                     Console.WriteLine("A conta escolhida não possui pedidos!");
                     return;
                 }
-                Pedido pedido = (Pedido)ValidarIdPedido(conta.PedidosLista);
+                Pedido pedido = ValidarIdPedido(conta.PedidosLista);
                 repositorioConta.RemoverContaPedido(conta, pedido);
                 entidadeValida = ValidarEntidade(conta);
                 Console.WriteLine("Pedido removido!");
@@ -162,31 +162,39 @@ namespace Prova.ModuloConta
         public void VerFaturamento()
         {
             DateTime data = ValidarData("Digite a data: ");
-            double faturamento = repositorioConta.ObterFaturamentoDia(data);
+            double faturamento = 0;
+            foreach (Conta conta in repositorioConta.ObterFaturamentoDia(data))
+            {
+                if (
+                    data == conta.DataFechamento
+                )
+                {
+                    faturamento += conta.TotalConta;
+                }
+            }
             Console.WriteLine($"Faturamento de {data.ToString("dd/MM/yyyy")}: R${Math.Round(faturamento, 2)}");
         }
 
-        public override EntidadeBase RegistrarEntidade()
+        public override Conta RegistrarEntidade()
         {
             Conta conta = new Conta();
             PreencherAtributos(conta);
             return conta;
         }
 
-        public override void PreencherAtributos(EntidadeBase entidade)
+        public override void PreencherAtributos(Conta conta)
         {
             bool entidadeValida = false;
             while (!entidadeValida)
             {
-                Conta conta = (Conta)entidade;
-                Garcom garcom = (Garcom)telaGarcom.ValidarId();
+                Garcom garcom = telaGarcom.ValidarId();
                 conta.ContaGarcom = garcom;
-                Mesa mesa = (Mesa)telaMesa.ValidarId();
+                Mesa mesa = telaMesa.ValidarId();
                 conta.ContaMesa = mesa;
                 Console.Write("Digite o tipo da conta: ");
                 string tipo = Console.ReadLine();
                 conta.Tipo = tipo;
-                conta.PedidosLista = new ArrayList();
+                conta.PedidosLista = new List<Pedido>();
                 entidadeValida = ValidarEntidade(conta);
             }
         }
@@ -197,36 +205,49 @@ namespace Prova.ModuloConta
             Pedido pedido = new Pedido();
             while (!entidadeValida)
             {
-                Produto produto = (Produto)telaProduto.ValidarId();
+                Produto produto = telaProduto.ValidarId();
                 pedido.Nome = produto.Nome;
                 int quantidade = ValidarInt("Digite a quantidade do produto: ");
                 pedido.Quantidade = quantidade;
                 pedido.ValorUnidade = produto.ValorUnidade;
                 pedido.ValorTotal = pedido.ValorUnidade * pedido.Quantidade;
-                entidadeValida = ValidarEntidade(pedido);
+                entidadeValida = ValidarPedido(pedido);
             }
             return pedido;
         }
 
-        public virtual EntidadeBase ValidarIdPedido(ArrayList lista)
+        protected bool ValidarPedido(Pedido pedido)
         {
-            EntidadeBase entidade;
+            if (pedido.ObterErros().Count > 0)
+            {
+                foreach (string erro in pedido.ObterErros())
+                {
+                    Console.WriteLine(erro);
+                }
+                Console.ReadLine();
+                return false;
+            }
+            return true;
+        }
+
+        public virtual Pedido ValidarIdPedido(List<Pedido> lista)
+        {
             while (true)
             {
                 MostrarPedidos(lista);
                 int indice = ValidarInt("Digite o id: ");
-                entidade = repositorio.EncontrarRegistro(indice, lista);
-                if (entidade == null)
+                Pedido pedido = repositorio.EncontrarRegistro(indice, lista);
+                if (pedido == null)
                 {
                     Console.WriteLine("O id escolhido não existe!");
                     Console.ReadLine();
                     continue;
                 }
-                return entidade;
+                return pedido;
             }
         }
 
-        public void MostrarPedidos(ArrayList lista)
+        public void MostrarPedidos(List<Pedido> lista)
         {
             Console.Clear();
             Console.WriteLine(titulo);
