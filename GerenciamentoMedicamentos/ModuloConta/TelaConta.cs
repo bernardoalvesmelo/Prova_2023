@@ -1,4 +1,5 @@
 
+using System;
 using System.Collections;
 
 using Prova.ModuloCompartilhado;
@@ -191,11 +192,25 @@ namespace Prova.ModuloConta
                 conta.ContaGarcom = garcom;
                 Mesa mesa = telaMesa.ValidarId();
                 conta.ContaMesa = mesa;
-                Console.Write("Digite o tipo da conta: ");
-                string tipo = Console.ReadLine();
-                conta.Tipo = tipo;
+                conta.Tipo = ValidarTipoConta("Digite o tipo da conta |ESPECIAL-COMUM|: ");
                 conta.PedidosLista = new List<Pedido>();
                 entidadeValida = ValidarEntidade(conta);
+            }
+        }
+
+        private Conta.TipoConta ValidarTipoConta(string mensagem)
+        {
+            while (true)
+            {
+                Console.Write(mensagem);
+                string tipo = Console.ReadLine().ToUpper();
+                string[] opcoes = { "ESPECIAL", "COMUM" };
+                if (opcoes.Contains(tipo))
+                {
+                    return (Conta.TipoConta)Enum.Parse(typeof(Conta.TipoConta), tipo);
+                }
+                Console.WriteLine("Digite ESPECIAL ou COMUM!");
+                Console.ReadLine();
             }
         }
 

@@ -9,7 +9,13 @@ namespace Prova.ModuloConta
     {
         static private int id = 0;
 
-        public string Tipo;
+        public enum TipoConta
+        {
+            ESPECIAL, 
+            COMUM,
+        }
+
+        public TipoConta Tipo { get; set; }
 
         public Garcom ContaGarcom { get; set; }
 
@@ -42,9 +48,9 @@ namespace Prova.ModuloConta
 
         public override string[] ObterAtributos()
         {
-            string[] atributos = { (Id + ""), Tipo, ContaGarcom.Nome, ("Mesa: " + ContaMesa.Numero), 
-                "R$: " + (Math.Round(TotalConta, 2) + ""), 
-                DataFechamento.Year == 1 ? "Em Aberto": DataFechamento.ToString("dd/MM/yyyy")};
+            string[] atributos = { (Id + ""),  Enum.GetName(typeof(TipoConta), Tipo), ContaGarcom.Nome, 
+                ("Mesa: " + ContaMesa.Numero), "R$: " + (Math.Round(TotalConta, 2) + ""), 
+                DataFechamento == DateTime.MinValue ? "Em Aberto": DataFechamento.ToString("dd/MM/yyyy")};
             return atributos;
         }
 
@@ -56,11 +62,6 @@ namespace Prova.ModuloConta
         public override ArrayList ObterErros()
         {
             ArrayList erros = new ArrayList();
-
-            if (string.IsNullOrEmpty(Tipo.Trim()))
-            {
-                erros.Add("O campo tipo é obrigatório");
-            }
 
             DateTime hoje = DateTime.Now.Date;
 
