@@ -75,6 +75,13 @@ namespace Prova
             conta.Tipo = (Conta.TipoConta)Enum.Parse(typeof(Conta.TipoConta), "ESPECIAL");
             conta.PedidosLista = new List<Pedido>();
             repositorioConta.InserirRegistro(conta);
+
+            Pedido pedido = new Pedido();
+            pedido.Nome = produto.Nome;
+            pedido.Quantidade = 3;
+            pedido.ValorUnidade = produto.ValorUnidade;
+            pedido.ValorTotal = pedido.ValorUnidade * pedido.Quantidade;
+            repositorioConta.InserirContaPedido(conta, pedido);
         }
 
         static void MostrarMenu()
