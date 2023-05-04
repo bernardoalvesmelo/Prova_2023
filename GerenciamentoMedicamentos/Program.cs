@@ -22,6 +22,7 @@ namespace Prova
                 telaMesa,
                 telaProduto);
             bool continuar = true;
+            InserirRegistrosIniciais(repositorioGarcom, repositorioMesa, repositorioConta, repositorioProduto);
             while (continuar)
             {
                 MostrarMenu();
@@ -49,6 +50,31 @@ namespace Prova
                         continue;
                 }
             }
+        }
+
+        private static void InserirRegistrosIniciais(RepositorioGarcom repositorioGarcom, RepositorioMesa repositorioMesa, RepositorioConta repositorioConta, RepositorioProduto repositorioProduto)
+        {
+            Garcom garcom = new Garcom();
+            garcom.Nome = "Jack";
+            garcom.Idade = 22;
+            repositorioGarcom.InserirRegistro(garcom);
+
+            Mesa mesa = new Mesa();
+            mesa.Numero = 321;
+            mesa.Tipo = "Madeira";
+            repositorioMesa.InserirRegistro(mesa);
+
+            Produto produto = new Produto();
+            produto.ValorUnidade = 2;
+            produto.Nome = "Bolacha";
+            repositorioProduto.InserirRegistro(produto);
+
+            Conta conta = new Conta();
+            conta.ContaGarcom = garcom;
+            conta.ContaMesa = mesa;
+            conta.Tipo = (Conta.TipoConta)Enum.Parse(typeof(Conta.TipoConta), "ESPECIAL");
+            conta.PedidosLista = new List<Pedido>();
+            repositorioConta.InserirRegistro(conta);
         }
 
         static void MostrarMenu()

@@ -11,7 +11,7 @@ namespace Prova.ModuloConta
 
         public enum TipoConta
         {
-            ESPECIAL, 
+            ESPECIAL,
             COMUM,
         }
 
@@ -25,16 +25,18 @@ namespace Prova.ModuloConta
 
         public DateTime DataFechamento { get; set; }
 
-        public double TotalConta { get
+        public double TotalConta
+        {
+            get
             {
                 double soma = 0;
-                foreach(Pedido pedido in PedidosLista)
+                foreach (Pedido pedido in PedidosLista)
                 {
                     soma += pedido.ValorTotal;
                 }
                 return soma;
-            } 
             }
+        }
 
         public Conta()
         {
@@ -48,8 +50,8 @@ namespace Prova.ModuloConta
 
         public override string[] ObterAtributos()
         {
-            string[] atributos = { (Id + ""),  Enum.GetName(typeof(TipoConta), Tipo), ContaGarcom.Nome, 
-                ("Mesa: " + ContaMesa.Numero), "R$: " + (Math.Round(TotalConta, 2) + ""), 
+            string[] atributos = { (Id + ""),  Enum.GetName(typeof(TipoConta), Tipo), ContaGarcom.Nome,
+                ("Mesa: " + ContaMesa.Numero), "R$: " + (Math.Round(TotalConta, 2) + ""),
                 DataFechamento == DateTime.MinValue ? "Em Aberto": DataFechamento.ToString("dd/MM/yyyy")};
             return atributos;
         }
