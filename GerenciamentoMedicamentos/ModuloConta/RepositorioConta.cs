@@ -5,10 +5,12 @@ namespace Prova.ModuloConta
     public class RepositorioConta : RepositorioBase<Conta>
     {
         public List<Conta> ListaFechada { get; set; }
+        private int contadorPedidos;
 
         public RepositorioConta()
         {
             this.ListaFechada = new List<Conta>();
+            this.contadorPedidos = 0;
         }
         public void FecharConta(Conta conta)
         {
@@ -18,6 +20,8 @@ namespace Prova.ModuloConta
 
         public void InserirContaPedido(Conta conta, Pedido pedido)
         {
+            contadorPedidos++;
+            pedido.Id = contadorPedidos;
             conta.PedidosLista.Add(pedido);
         }
 

@@ -5,21 +5,10 @@ namespace Prova.ModuloProduto
 {
     public class Produto : EntidadeBase<Produto>
     {
-        static private int id = 0;
 
         public string Nome { get; set; }
 
         public double ValorUnidade { get; set; }
-
-        public Produto()
-        {
-            ObterId(ref id);
-        }
-
-        public Produto(int id)
-        {
-            Id = id;
-        }
 
         public override string[] ObterAtributos()
         {
@@ -50,9 +39,5 @@ namespace Prova.ModuloProduto
             return erros;
         }
 
-        public override Produto ObterNovaInstancia()
-        {
-            return new Produto(Id);
-        }
     }
 }

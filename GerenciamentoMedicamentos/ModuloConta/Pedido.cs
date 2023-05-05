@@ -6,7 +6,6 @@ namespace Prova.ModuloConta
 {
     public class Pedido : EntidadeBase<Pedido>
     {
-        static private int id = 0;
 
         public Produto PedidoProduto { get; set; }
         public string Nome { get; set; }
@@ -17,15 +16,6 @@ namespace Prova.ModuloConta
 
         public int Quantidade { get; set; }
 
-        public Pedido()
-        {
-            ObterId(ref id);
-        }
-
-        public Pedido(int id)
-        {
-            Id = id;
-        }
 
         public override string[] ObterAtributos()
         {
@@ -68,11 +58,6 @@ namespace Prova.ModuloConta
             }
 
             return erros;
-        }
-
-        public override Pedido ObterNovaInstancia()
-        {
-            return new Pedido(Id);
         }
 
     }

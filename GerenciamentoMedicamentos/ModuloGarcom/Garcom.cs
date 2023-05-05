@@ -12,16 +12,6 @@ namespace Prova.ModuloGarcom
 
         public int Idade { get; set; }
 
-        public Garcom()
-        {
-            ObterId(ref id);
-        }
-
-        public Garcom(int id)
-        {
-            Id = id;
-        }
-
         public override string[] ObterAtributos()
         {
             string[] atributos = { (Id + ""), Nome, (Idade + "") };
@@ -49,11 +39,6 @@ namespace Prova.ModuloGarcom
             }
 
             return erros;
-        }
-
-        public override Garcom ObterNovaInstancia()
-        {
-            return new Garcom(Id);
         }
 
     }

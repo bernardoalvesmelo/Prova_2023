@@ -100,7 +100,8 @@ namespace Prova.ModuloCompartilhado
         {
             T entidadeAtualizada = ValidarId();
             int id = entidadeAtualizada.Id;
-            entidadeAtualizada = (T)entidadeAtualizada.ObterNovaInstancia();
+            entidadeAtualizada = Activator.CreateInstance<T>();
+            entidadeAtualizada.Id = id;
             PreencherAtributos(entidadeAtualizada);
             repositorio.EditarRegistro(entidadeAtualizada, id);
         }

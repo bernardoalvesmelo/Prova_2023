@@ -5,14 +5,18 @@ namespace Prova.ModuloCompartilhado
     public abstract class RepositorioBase<T> where T : EntidadeBase<T>
     {
         public List<T> Lista { get; protected set; }
+        private int contadorRegistros;
 
         public RepositorioBase()
         {
             this.Lista = new List<T>();
+            contadorRegistros = 0;
         }
 
         public virtual void InserirRegistro(T entidade)
         {
+            contadorRegistros++;
+            entidade.Id = contadorRegistros;
             Lista.Add(entidade);
         }
 

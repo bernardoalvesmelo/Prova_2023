@@ -7,7 +7,6 @@ namespace Prova.ModuloConta
 {
     public class Conta : EntidadeBase<Conta>
     {
-        static private int id = 0;
 
         public enum TipoConta
         {
@@ -38,16 +37,6 @@ namespace Prova.ModuloConta
             }
         }
 
-        public Conta()
-        {
-            ObterId(ref id);
-        }
-
-        public Conta(int id)
-        {
-            Id = id;
-        }
-
         public override string[] ObterAtributos()
         {
             string[] atributos = { (Id + ""),  Enum.GetName(typeof(TipoConta), Tipo), ContaGarcom.Nome,
@@ -74,11 +63,5 @@ namespace Prova.ModuloConta
 
             return erros;
         }
-
-        public override Conta ObterNovaInstancia()
-        {
-            return new Conta(Id);
-        }
-
     }
 }

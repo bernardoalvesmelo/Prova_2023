@@ -33,7 +33,7 @@ namespace Prova.ModuloProduto
                 double valorUnidade = ValidarDouble("Digite o valor da unidade: ");
                 produto.ValorUnidade = valorUnidade;
                 entidadeValida = ValidarEntidade(produto);
-            } 
+            }
         }
     }
 }

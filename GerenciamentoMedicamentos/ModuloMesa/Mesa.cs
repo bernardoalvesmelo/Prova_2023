@@ -6,22 +6,11 @@ namespace Prova.ModuloMesa
 {
     public class Mesa : EntidadeBase<Mesa>
     {
-        static private int id = 0;
 
 
         public int Numero { get; set; }
 
         public string Tipo { get; set; }
-
-        public Mesa()
-        {
-            ObterId(ref id);
-        }
-
-        public Mesa(int id)
-        {
-            Id = id;
-        }
 
         public override string[] ObterAtributos()
         {
@@ -50,11 +39,6 @@ namespace Prova.ModuloMesa
             }
 
             return erros;
-        }
-
-        public override Mesa ObterNovaInstancia()
-        {
-            return new Mesa(Id);
         }
 
     }
