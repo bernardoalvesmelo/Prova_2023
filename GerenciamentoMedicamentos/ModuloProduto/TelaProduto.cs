@@ -15,55 +15,6 @@ namespace Prova.ModuloProduto
             Cabecalho = cabecalho;
         }
 
-        public void Opcoes()
-        {
-            while (true)
-            {
-                MostrarMenu();
-                string opcao = Console.ReadLine();
-                switch (opcao)
-                {
-                    case "0":
-                        return;
-                    case "1":
-                        repositorio.InserirRegistro(RegistrarEntidade());
-                        Console.WriteLine("Produto registrado!");
-                        Console.ReadLine();
-                        break;
-                    case "2":
-                        MostrarEntidades();
-                        Console.ReadLine();
-                        break;
-                    case "3":
-                        if (repositorio.Lista.Count <= 0)
-                        {
-                            Console.WriteLine("Não existe produtos registrados no sistema!");
-                            Console.ReadLine();
-                            return;
-                        }
-                        AtualizarEntidade();
-                        Console.WriteLine("Produto atualizado!");
-                        Console.ReadLine();
-                        break;
-                    case "4":
-                        if (repositorio.Lista.Count <= 0)
-                        {
-                            Console.WriteLine("Não existe produtos registradas no sistema!");
-                            Console.ReadLine();
-                            return;
-                        }
-                        RemoverEntidade();
-                        Console.WriteLine("Produto removido!");
-                        Console.ReadLine();
-                        break;
-                    default:
-                        Console.WriteLine("Opção não encontrada!");
-                        Console.ReadLine();
-                        break;
-                }
-            }
-        }
-
         public override Produto RegistrarEntidade()
         {
             Produto produto = new Produto();

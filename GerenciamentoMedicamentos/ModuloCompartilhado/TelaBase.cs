@@ -22,6 +22,56 @@ namespace Prova.ModuloCompartilhado
             string[] cabecalho = { "Id:" };
             Cabecalho = cabecalho;
         }
+
+        public virtual void Opcoes()
+        {
+            while (true)
+            {
+                MostrarMenu();
+                string opcao = Console.ReadLine();
+                switch (opcao)
+                {
+                    case "0":
+                        return;
+                    case "1":
+                        repositorio.InserirRegistro(RegistrarEntidade());
+                        Console.WriteLine($"Registro de {nomeEntidade} bem sucedido!");
+                        Console.ReadLine();
+                        break;
+                    case "2":
+                        MostrarEntidades();
+                        Console.ReadLine();
+                        break;
+                    case "3":
+                        if (repositorio.Lista.Count <= 0)
+                        {
+                            Console.WriteLine($"Não existe {titulo} no sistema!");
+                            Console.ReadLine();
+                            return;
+                        }
+                        AtualizarEntidade();
+                        Console.WriteLine($"Atualização de {nomeEntidade} bem sucedida!");
+                        Console.ReadLine();
+                        break;
+                    case "4":
+                        if (repositorio.Lista.Count <= 0)
+                        {
+                            Console.WriteLine($"Não existe {titulo} no sistema!");
+                            Console.ReadLine();
+                            return;
+                        }
+                        RemoverEntidade();
+                        Console.WriteLine($"Remoção de {nomeEntidade} bem sucedida!");
+                        Console.ReadLine();
+                        break;
+                    default:
+                        Console.WriteLine("Opção não encontrada!");
+                        Console.ReadLine();
+                        break;
+                }
+            }
+        }
+
         public abstract T RegistrarEntidade();
 
         public virtual void MostrarEntidades()

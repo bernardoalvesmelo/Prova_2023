@@ -27,7 +27,7 @@ namespace Prova.ModuloConta
             this.telaProduto = telaProduto;
         }
 
-        public void Opcoes()
+        public override void Opcoes()
         {
             while (true)
             {
