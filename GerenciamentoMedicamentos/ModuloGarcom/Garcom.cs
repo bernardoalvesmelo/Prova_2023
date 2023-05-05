@@ -4,7 +4,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloGarcom
 {
-    public class Garcom : EntidadeBase
+    public class Garcom : EntidadeBase<Garcom>
     {
         static private int id = 0;
 
@@ -28,11 +28,10 @@ namespace Prova.ModuloGarcom
             return atributos;
         }
 
-        public override void Atualizar(EntidadeBase entidade)
+        public override void Atualizar(Garcom garcom)
         {
-            Garcom garcon = (Garcom)entidade;
-            Nome = garcon.Nome;
-            Idade = garcon.Idade;
+            Nome = garcom.Nome;
+            Idade = garcom.Idade;
         }
 
         public override ArrayList ObterErros()
@@ -52,7 +51,7 @@ namespace Prova.ModuloGarcom
             return erros;
         }
 
-        public override EntidadeBase ObterNovaInstancia()
+        public override Garcom ObterNovaInstancia()
         {
             return new Garcom(Id);
         }

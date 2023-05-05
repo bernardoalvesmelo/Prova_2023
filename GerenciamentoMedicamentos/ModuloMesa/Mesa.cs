@@ -4,7 +4,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloMesa
 {
-    public class Mesa : EntidadeBase
+    public class Mesa : EntidadeBase<Mesa>
     {
         static private int id = 0;
 
@@ -29,9 +29,8 @@ namespace Prova.ModuloMesa
             return atributos;
         }
 
-        public override void Atualizar(EntidadeBase entidade)
+        public override void Atualizar(Mesa mesa)
         {
-            Mesa mesa = (Mesa)entidade;
             Numero = mesa.Numero;
             Tipo = mesa.Tipo;
         }

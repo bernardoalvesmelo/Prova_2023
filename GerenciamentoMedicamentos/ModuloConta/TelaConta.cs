@@ -1,7 +1,3 @@
-
-using System;
-using System.Collections;
-
 using Prova.ModuloCompartilhado;
 using Prova.ModuloGarcom;
 using Prova.ModuloMesa;
@@ -275,9 +271,9 @@ namespace Prova.ModuloConta
             Console.Write(cabecalho);
             Console.WriteLine();
             Console.WriteLine("".PadRight(cabecalho.Length, '-'));
-            foreach (EntidadeBase entidade in lista)
+            foreach (Pedido pedido  in lista)
             {
-                foreach (string atributo in entidade.ObterAtributos())
+                foreach (string atributo in pedido.ObterAtributos())
                 {
                     Console.Write(atributo.PadRight(20) + "|");
                 }

@@ -1,5 +1,4 @@
 using Prova.ModuloCompartilhado;
-using Prova.ModuloConta;
 
 namespace Prova.ModuloProduto
 {

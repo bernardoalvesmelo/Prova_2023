@@ -8,10 +8,5 @@ namespace Prova.ModuloGarcom
         {
 
         }
-
-        public override Garcom EncontrarRegistro(int id)
-        {
-            return base.EncontrarRegistro(id);
-        }
     }
 }

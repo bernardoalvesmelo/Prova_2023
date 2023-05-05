@@ -1,9 +1,8 @@
 namespace Prova.ModuloCompartilhado
 {
-    using System.Collections;
     using System.Collections.Generic;
 
-    public abstract class RepositorioBase<T> where T : EntidadeBase
+    public abstract class RepositorioBase<T> where T : EntidadeBase<T>
     {
         public List<T> Lista { get; protected set; }
 
@@ -25,7 +24,7 @@ namespace Prova.ModuloCompartilhado
         }
 
         public virtual TRegistro EncontrarRegistro<TRegistro>(int id, List<TRegistro> lista)
-            where TRegistro : EntidadeBase
+            where TRegistro : EntidadeBase<TRegistro>
         {
             foreach (TRegistro entidade in lista)
             {

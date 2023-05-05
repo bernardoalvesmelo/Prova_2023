@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace Prova.ModuloCompartilhado
 {
-    public abstract class TelaBase<T> where T : EntidadeBase
+    public abstract class TelaBase<T> where T : EntidadeBase<T>
     {
         protected RepositorioBase<T> repositorio;
         protected string titulo;
@@ -22,7 +22,7 @@ namespace Prova.ModuloCompartilhado
             string[] cabecalho = { "Id:" };
             Cabecalho = cabecalho;
         }
-        public abstract EntidadeBase RegistrarEntidade();
+        public abstract T RegistrarEntidade();
 
         public virtual void MostrarEntidades()
         {

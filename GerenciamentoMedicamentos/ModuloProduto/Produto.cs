@@ -3,7 +3,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloProduto
 {
-    public class Produto : EntidadeBase
+    public class Produto : EntidadeBase<Produto>
     {
         static private int id = 0;
 
@@ -27,9 +27,8 @@ namespace Prova.ModuloProduto
             return atributos;
         }
 
-        public override void Atualizar(EntidadeBase entidade)
+        public override void Atualizar(Produto produto)
         {
-            Produto produto = (Produto)entidade;
             Nome = produto.Nome;
             ValorUnidade = produto.ValorUnidade;
         }

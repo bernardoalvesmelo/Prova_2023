@@ -9,9 +9,5 @@ namespace Prova.ModuloMesa
 
         }
 
-        public override Mesa EncontrarRegistro(int id)
-        {
-            return base.EncontrarRegistro(id);
-        }
     }
 }

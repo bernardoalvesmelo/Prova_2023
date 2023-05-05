@@ -5,7 +5,7 @@ using Prova.ModuloMesa;
 
 namespace Prova.ModuloConta
 {
-    public class Conta : EntidadeBase
+    public class Conta : EntidadeBase<Conta>
     {
         static private int id = 0;
 
@@ -56,9 +56,9 @@ namespace Prova.ModuloConta
             return atributos;
         }
 
-        public override void Atualizar(EntidadeBase entidade)
+        public override void Atualizar(Conta conta)
         {
-            Conta conta = (Conta)entidade;
+            Tipo = conta.Tipo;
         }
 
         public override ArrayList ObterErros()

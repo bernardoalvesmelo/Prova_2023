@@ -4,7 +4,7 @@ using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloConta
 {
-    public class Pedido : EntidadeBase
+    public class Pedido : EntidadeBase<Pedido>
     {
         static private int id = 0;
 
@@ -34,9 +34,8 @@ namespace Prova.ModuloConta
             return atributos;
         }
 
-        public override void Atualizar(EntidadeBase entidade)
+        public override void Atualizar(Pedido pedido)
         {
-            Pedido pedido = (Pedido)entidade;
             PedidoProduto = pedido.PedidoProduto;
             Nome = pedido.Nome;
             Quantidade = pedido.Quantidade;

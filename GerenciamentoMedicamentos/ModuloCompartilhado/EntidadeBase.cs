@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Prova.ModuloCompartilhado
 {
-    public abstract class EntidadeBase
+    public abstract class EntidadeBase<T>
     {
         public int Id { get; protected set; }
 
@@ -12,12 +12,12 @@ namespace Prova.ModuloCompartilhado
             Id = id;
         }
 
-        public abstract void Atualizar(EntidadeBase entidade);
+        public abstract void Atualizar(T entidade);
 
         public abstract string[] ObterAtributos();
 
         public abstract ArrayList ObterErros();
 
-        public abstract EntidadeBase ObterNovaInstancia();
+        public abstract T ObterNovaInstancia();
     }
 }

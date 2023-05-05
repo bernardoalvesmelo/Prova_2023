@@ -9,9 +9,5 @@ namespace Prova.ModuloProduto
 
         }
 
-        public override Produto EncontrarRegistro(int id)
-        {
-            return base.EncontrarRegistro(id);
-        }
     }
 }

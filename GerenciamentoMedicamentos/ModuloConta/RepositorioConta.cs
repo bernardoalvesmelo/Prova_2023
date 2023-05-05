@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Globalization;
 using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloConta
@@ -12,12 +10,6 @@ namespace Prova.ModuloConta
         {
             this.ListaFechada = new List<Conta>();
         }
-
-        public override Conta EncontrarRegistro(int id)
-        {
-            return base.EncontrarRegistro(id);
-        }
-
         public void FecharConta(Conta conta)
         {
             ListaFechada.Add(conta);
