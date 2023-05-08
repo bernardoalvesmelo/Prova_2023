@@ -1,8 +1,5 @@
 namespace Prova.ModuloCompartilhado
 {
-    using System.Collections;
-    using System.Collections.Generic;
-
     public abstract class RepositorioBase<T> where T : EntidadeBase<T>
     {
         public List<T> Lista { get; protected set; }

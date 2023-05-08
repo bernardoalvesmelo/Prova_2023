@@ -1,4 +1,3 @@
-using Prova.ModuloCompartilhado;
 using Prova.ModuloGarcom;
 using Prova.ModuloMesa;
 using Prova.ModuloProduto;

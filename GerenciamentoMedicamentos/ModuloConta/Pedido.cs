@@ -1,6 +1,4 @@
-using System.Collections;
 using Prova.ModuloProduto;
-using Prova.ModuloCompartilhado;
 
 namespace Prova.ModuloConta
 {

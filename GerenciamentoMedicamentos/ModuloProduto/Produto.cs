@@ -1,6 +1,3 @@
-using System.Collections;
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloProduto
 {
     public class Produto : EntidadeBase<Produto>

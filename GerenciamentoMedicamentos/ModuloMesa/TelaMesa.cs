@@ -1,11 +1,8 @@
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloMesa
 {
 
     public class TelaMesa : TelaBase<Mesa>
     {
-
 
         public TelaMesa(RepositorioMesa repositorio) : base(repositorio)
         {

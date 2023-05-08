@@ -1,5 +1,3 @@
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloProduto
 {
 

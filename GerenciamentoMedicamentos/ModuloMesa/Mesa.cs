@@ -1,12 +1,7 @@
-using System.Collections;
-
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloMesa
 {
     public class Mesa : EntidadeBase<Mesa>
     {
-
 
         public int Numero { get; set; }
 

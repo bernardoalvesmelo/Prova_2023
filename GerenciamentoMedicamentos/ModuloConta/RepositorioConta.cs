@@ -1,5 +1,3 @@
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloConta
 {
     public class RepositorioConta : RepositorioBase<Conta>

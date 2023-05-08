@@ -1,7 +1,3 @@
-using System.Collections;
-
-using Prova.ModuloCompartilhado;
-
 namespace Prova.ModuloGarcom
 {
     public class Garcom : EntidadeBase<Garcom>

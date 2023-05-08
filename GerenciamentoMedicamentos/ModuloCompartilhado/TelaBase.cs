@@ -1,5 +1,3 @@
-using System.Globalization;
-
 namespace Prova.ModuloCompartilhado
 {
     public abstract class TelaBase<T> where T : EntidadeBase<T>

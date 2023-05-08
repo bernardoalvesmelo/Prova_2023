@@ -1,5 +1,3 @@
-using System.Collections;
-
 namespace Prova.ModuloCompartilhado
 {
     public abstract class EntidadeBase<T>
