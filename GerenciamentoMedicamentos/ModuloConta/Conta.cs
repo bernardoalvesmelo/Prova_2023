@@ -28,12 +28,7 @@ namespace Prova.ModuloConta
         {
             get
             {
-                double soma = 0;
-                foreach (Pedido pedido in PedidosLista)
-                {
-                    soma += pedido.ValorTotal;
-                }
-                return soma;
+                return PedidosLista.Sum(p => p.ValorTotal);
             }
         }
 

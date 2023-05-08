@@ -159,16 +159,8 @@ namespace Prova.ModuloConta
         public void VerFaturamento()
         {
             DateTime data = ValidarData("Digite a data: ");
-            double faturamento = 0;
-            foreach (Conta conta in repositorioConta.ObterFaturamentoDia(data))
-            {
-                if (
-                    data == conta.DataFechamento
-                )
-                {
-                    faturamento += conta.TotalConta;
-                }
-            }
+            double faturamento = repositorioConta.ObterFaturamentoDia(data).Sum(c => c.TotalConta);
+         
             Console.WriteLine($"Faturamento de {data.ToString("dd/MM/yyyy")}: R${Math.Round(faturamento, 2)}");
         }
 

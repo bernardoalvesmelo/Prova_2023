@@ -39,18 +39,7 @@ namespace Prova.ModuloConta
 
         public List<Conta> ObterFaturamentoDia(DateTime data)
         {
-
-            List<Conta> listaFaturamento = new List<Conta>();
-            foreach (Conta conta in ListaFechada)
-            {
-                if (
-                    data == conta.DataFechamento
-                )
-                {
-                    listaFaturamento.Add(conta);
-                }
-            }
-            return listaFaturamento;
+            return ListaFechada.FindAll(conta => data == conta.DataFechamento);
         }
     }
 }

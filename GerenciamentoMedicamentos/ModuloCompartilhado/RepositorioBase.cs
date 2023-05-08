@@ -1,5 +1,6 @@
 namespace Prova.ModuloCompartilhado
 {
+    using System.Collections;
     using System.Collections.Generic;
 
     public abstract class RepositorioBase<T> where T : EntidadeBase<T>
@@ -30,28 +31,12 @@ namespace Prova.ModuloCompartilhado
         public virtual TRegistro EncontrarRegistro<TRegistro>(int id, List<TRegistro> lista)
             where TRegistro : EntidadeBase<TRegistro>
         {
-            foreach (TRegistro entidade in lista)
-            {
-                if (entidade.Id == id)
-                {
-                    return entidade;
-                }
-            }
-
-            return null;
+            return lista.Find(r => r.Id == id);
         }
 
         public virtual T EncontrarRegistro(int id)
         {
-            foreach (T entidade in Lista)
-            {
-                if (entidade.Id == id)
-                {
-                    return entidade;
-                }
-            }
-
-            return null;
+            return Lista.Find(r => r.Id == id);
         }
 
         public virtual void RemoverRegistro(T entidade)
